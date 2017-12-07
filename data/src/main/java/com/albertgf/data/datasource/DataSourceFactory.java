@@ -24,7 +24,7 @@ public class DataSourceFactory {
             this.context = context.getApplicationContext();
 
 
-            ApiConfig.Builder apiBuilder = new ApiConfig.Builder(BuildConfig.API_URL);
+            ApiConfig.Builder apiBuilder = new ApiConfig.Builder(BuildConfig.API_URL, BuildConfig.API_KEY);
             if (BuildConfig.DEBUG) {
                 apiBuilder.debug();
             }

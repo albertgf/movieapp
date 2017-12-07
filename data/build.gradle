@@ -14,7 +14,8 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "API_URL", '"https://pokeapi.co/api/v2/"'
+        buildConfigField "String", "API_URL", '"https://api.themoviedb.org/3/"'
+        buildConfigField "String", "API_KEY", '"1574adc6473edaa4fbcdab55828f8887"'
 
     }
 
