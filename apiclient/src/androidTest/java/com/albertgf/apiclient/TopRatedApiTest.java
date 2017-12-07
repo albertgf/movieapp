@@ -24,16 +24,18 @@ import static com.albertgf.apiclient.ApiClientTest.API_KEY;
 @SmallTest
 public class TopRatedApiTest {
     private ApiClient client;
+    private ApiClient clientWrongKey;
 
     @Before
     public void setup() {
         client = ApiClientTest.givenMovieApiClient();
+        clientWrongKey = ApiClientTest.givenMovieApiClientWrongApiKey();
     }
 
     @Test
     public void givenCorrectApiKeyShouldGetTopRatedMovies()
             throws NetworkApiException, AuthApiException, NotFoundApiException, ServerApiException {
-        ApiResponsePagination pagination = client.getTopRatedMovies(API_KEY, 1);
+        ApiResponsePagination pagination = client.getTopRatedMovies(1);
 
         Assert.assertNotNull(pagination);
     }
@@ -42,10 +44,10 @@ public class TopRatedApiTest {
     public void givenCorrectApiKeyShouldPaginate()
             throws NetworkApiException, AuthApiException, NotFoundApiException, ServerApiException {
         int page = 1;
-        ApiResponsePagination pagination = client.getTopRatedMovies(API_KEY, page);
+        ApiResponsePagination pagination = client.getTopRatedMovies(page);
 
         if(pagination.getTotalPages() >= 2) {
-            pagination = client.getTopRatedMovies(API_KEY, ++page);
+            pagination = client.getTopRatedMovies(++page);
             page = pagination.getPage();
         }
 
@@ -55,20 +57,20 @@ public class TopRatedApiTest {
     @Test (expected = AuthApiException.class)
     public void givenWrongApiKeyShouldThrowAuthApiException()
             throws NetworkApiException, AuthApiException, NotFoundApiException, ServerApiException {
-        client.getTopRatedMovies("testt", 1);
+        clientWrongKey.getTopRatedMovies( 1);
     }
 
     @Test (expected = ServerApiException.class)
     public void givenInvalidPageNumberShouldThrowServerException()
             throws NetworkApiException, AuthApiException, NotFoundApiException, ServerApiException {
-        client.getTopRatedMovies(API_KEY, -1);
+        client.getTopRatedMovies(-1);
     }
 
     @Test
     public void givenPageOverTotalShouldReturnEmptyArrayOfResults()
             throws NetworkApiException, AuthApiException, NotFoundApiException, ServerApiException {
-        ApiResponsePagination pagination = client.getTopRatedMovies(API_KEY, 1);
-        pagination = client.getTopRatedMovies(API_KEY, pagination.getTotalPages() + 1);
+        ApiResponsePagination pagination = client.getTopRatedMovies( 1);
+        pagination = client.getTopRatedMovies(pagination.getTotalPages() + 1);
 
         Assert.assertEquals(pagination.getResults().size(), 0);
     }

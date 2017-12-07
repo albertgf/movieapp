@@ -24,17 +24,19 @@ import static com.albertgf.apiclient.ApiClientTest.API_KEY;
 @SmallTest
 public class SimilarApiTest {
     private ApiClient client;
+    private ApiClient clientWrongKey;
 
     @Before
     public void setup() {
         client = ApiClientTest.givenMovieApiClient();
+        clientWrongKey = ApiClientTest.givenMovieApiClientWrongApiKey();
     }
 
     @Test
     public void givenCorrectApiKeyShouldGetSimilarMovies()
             throws NetworkApiException, AuthApiException, NotFoundApiException, ServerApiException {
-        ApiResponsePagination pagination = client.getTopRatedMovies(API_KEY, 1);
-        ApiResponsePagination similarMovies = client.getSimilarMovies(API_KEY, pagination.getResults().get(0).getId());
+        ApiResponsePagination pagination = client.getTopRatedMovies(1);
+        ApiResponsePagination similarMovies = client.getSimilarMovies(pagination.getResults().get(0).getId());
 
         Assert.assertNotNull(similarMovies);
     }
@@ -42,12 +44,12 @@ public class SimilarApiTest {
     @Test (expected = AuthApiException.class)
     public void givenWrongApiKeyShouldThrowAuthApiException()
             throws NetworkApiException, AuthApiException, NotFoundApiException, ServerApiException {
-        client.getSimilarMovies("testt", 1);
+        clientWrongKey.getSimilarMovies(1);
     }
 
     @Test (expected = NotFoundApiException.class)
     public void givenInvalidMovieIdShouldThrowNotFoundException()
             throws NetworkApiException, AuthApiException, NotFoundApiException, ServerApiException {
-        client.getSimilarMovies(API_KEY, -1);
+        client.getSimilarMovies(-1);
     }
 }

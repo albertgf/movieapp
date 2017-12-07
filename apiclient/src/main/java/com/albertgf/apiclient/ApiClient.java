@@ -27,19 +27,20 @@ import static com.albertgf.apiclient.exception.GenerateException.manageServerErr
 
 public class ApiClient implements MovieApi {
     private final ApiConfig apiConfig;
+    private final String apiKey;
 
     public ApiClient(ApiConfig config) {
         if (config == null)
             throw new IllegalArgumentException("ApiConfig cannot be null");
         this.apiConfig = config;
+        this.apiKey = apiConfig.getApiKey();
     }
 
     private RestApi call() {
         return apiConfig.getApi();
     }
 
-    @Override public ApiResponsePagination getTopRatedMovies(String apiKey,
-                                                             int page) throws NetworkApiException,
+    @Override public ApiResponsePagination getTopRatedMovies(int page) throws NetworkApiException,
             NotFoundApiException, AuthApiException, ServerApiException {
         try {
             Response<ApiResponsePagination> response = call().getTopRatedMovies(apiKey, page).execute();
@@ -50,8 +51,8 @@ public class ApiClient implements MovieApi {
         }
     }
 
-    @Override public ApiResponsePagination getSimilarMovies(String apiKey,
-                                                            int id) throws NetworkApiException, NotFoundApiException, AuthApiException, ServerApiException {
+    @Override public ApiResponsePagination getSimilarMovies(
+            int id) throws NetworkApiException, NotFoundApiException, AuthApiException, ServerApiException {
         try {
             Response<ApiResponsePagination> response = call().getSimilarMovies(id, apiKey).execute();
             return responseApiPagination(response);
