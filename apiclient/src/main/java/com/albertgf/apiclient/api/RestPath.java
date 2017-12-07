@@ -5,4 +5,5 @@ package com.albertgf.apiclient.api;
  */
 
 public class RestPath {
+    public static final String TOP_RATED_PATH = "top_rated";
 }

@@ -19,4 +19,14 @@ public class GenerateException {
         throw new NotFoundApiException(code, "", new Exception
                 ());
     }
+
+    public static void manageAuthError(int code) throws AuthApiException {
+        throw new AuthApiException(code, "", new Exception
+                ());
+    }
+
+    public static void manageServerError(int code) throws ServerApiException {
+        throw new ServerApiException(code, "", new Exception
+                ());
+    }
 }
