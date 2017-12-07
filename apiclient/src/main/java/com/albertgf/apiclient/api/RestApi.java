@@ -19,7 +19,7 @@ public interface RestApi {
     );
 
     @GET (RestPath.SIMILAR_MOVIE_PATH) Call<ApiResponsePagination> getSimilarMovies(
-            @Query("api_key") String apiKey,
-            @Path("id") int id
+            @Path("id") int id,
+            @Query("api_key") String apiKey
     );
 }

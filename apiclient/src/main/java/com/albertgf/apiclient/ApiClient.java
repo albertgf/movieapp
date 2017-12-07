@@ -53,7 +53,7 @@ public class ApiClient implements MovieApi {
     @Override public ApiResponsePagination getSimilarMovies(String apiKey,
                                                             int id) throws NetworkApiException, NotFoundApiException, AuthApiException, ServerApiException {
         try {
-            Response<ApiResponsePagination> response = call().getSimilarMovies(apiKey, id).execute();
+            Response<ApiResponsePagination> response = call().getSimilarMovies(id, apiKey).execute();
             return responseApiPagination(response);
         } catch (IOException error) {
             manageError(error);

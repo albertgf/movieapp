@@ -5,7 +5,7 @@ package com.albertgf.apiclient;
  */
 
 public class ApiClientTest {
-    private static final String ANY_HOST_URL = "https://api.themoviedb.org/3/movie/";
+    private static final String ANY_HOST_URL = "https://api.themoviedb.org/3/";
     public static final String API_KEY = "1574adc6473edaa4fbcdab55828f8887";
 
     public static ApiClient givenMovieApiClient() {

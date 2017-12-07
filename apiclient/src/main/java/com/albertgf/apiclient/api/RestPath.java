@@ -5,6 +5,6 @@ package com.albertgf.apiclient.api;
  */
 
 public class RestPath {
-    static final String TOP_RATED_PATH = "/movie/top_rated";
-    static final String SIMILAR_MOVIE_PATH = "/movie/{id}/similar";
+    static final String TOP_RATED_PATH = "movie/top_rated";
+    static final String SIMILAR_MOVIE_PATH = "movie/{id}/similar";
 }
