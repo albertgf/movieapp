@@ -1,0 +1,13 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //DI
+    compile 'com.google.dagger:dagger:2.7'
+    compileOnly 'com.google.dagger:dagger-compiler:2.7'
+    compileOnly 'javax.annotation:jsr250-api:1.0'
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
