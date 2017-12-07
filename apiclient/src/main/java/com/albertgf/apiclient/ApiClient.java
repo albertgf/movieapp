@@ -60,4 +60,4 @@ public class ApiClient implements MovieApi {
         }
     }
 }
-}
+
