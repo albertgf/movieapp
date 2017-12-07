@@ -13,4 +13,8 @@ import com.albertgf.apiclient.model.ApiResponsePagination;
 public interface MovieApi {
     ApiResponsePagination getTopRatedMovies(String apiKey, int page) throws NetworkApiException,
             NotFoundApiException, AuthApiException, ServerApiException;
+
+
+    ApiResponsePagination getSimilarMovies(String apiKey, int id) throws NetworkApiException,
+            NotFoundApiException, AuthApiException, ServerApiException;
 }

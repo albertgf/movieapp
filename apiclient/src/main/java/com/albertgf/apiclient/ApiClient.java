@@ -43,20 +43,36 @@ public class ApiClient implements MovieApi {
             NotFoundApiException, AuthApiException, ServerApiException {
         try {
             Response<ApiResponsePagination> response = call().getTopRatedMovies(apiKey, page).execute();
-            switch (response.code()) {
-                case CODE_SUCCESS:
-                    return response.body();
-                case CODE_NOT_FOUND:
-                    manageNotFoundError(CODE_NOT_FOUND);
-                case CODE_AUTH:
-                    manageAuthError(CODE_AUTH);
-                default:
-                    manageServerError(CODE_SERVER);
-                    return null;
-            }
+            return responseApiPagination(response);
         } catch (IOException error) {
             manageError(error);
             return null;
+        }
+    }
+
+    @Override public ApiResponsePagination getSimilarMovies(String apiKey,
+                                                            int id) throws NetworkApiException, NotFoundApiException, AuthApiException, ServerApiException {
+        try {
+            Response<ApiResponsePagination> response = call().getSimilarMovies(apiKey, id).execute();
+            return responseApiPagination(response);
+        } catch (IOException error) {
+            manageError(error);
+            return null;
+        }
+    }
+
+    private ApiResponsePagination responseApiPagination(
+            Response<ApiResponsePagination> response) throws NetworkApiException, NotFoundApiException, AuthApiException, ServerApiException {
+        switch (response.code()) {
+            case CODE_SUCCESS:
+                return response.body();
+            case CODE_NOT_FOUND:
+                manageNotFoundError(CODE_NOT_FOUND);
+            case CODE_AUTH:
+                manageAuthError(CODE_AUTH);
+            default:
+                manageServerError(CODE_SERVER);
+                return null;
         }
     }
 }
