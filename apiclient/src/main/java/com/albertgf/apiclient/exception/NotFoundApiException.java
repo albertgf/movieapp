@@ -7,5 +7,7 @@ package com.albertgf.apiclient.exception;
 public class NotFoundApiException extends ApiException {
     public NotFoundApiException(int httpCode, String description, Throwable cause) {
         super(httpCode, description, cause);
+
+        typeException = Type.NOTFOUND;
     }
 }

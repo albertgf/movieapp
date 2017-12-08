@@ -6,8 +6,13 @@ package com.albertgf.apiclient.exception;
 
 public class ApiException extends Exception {
 
+    public enum Type {
+        AUTH, SERVER, NETWORK, NOTFOUND
+    }
+
     private final int httpCode;
     private boolean networkError = false;
+    protected Type typeException;
 
     public ApiException(boolean networkError, String description, Throwable cause) {
         this(-1, description, cause);
@@ -31,5 +36,9 @@ public class ApiException extends Exception {
 
     public boolean isNetworkError() {
         return networkError;
+    }
+
+    public Type getTypeException() {
+        return typeException;
     }
 }

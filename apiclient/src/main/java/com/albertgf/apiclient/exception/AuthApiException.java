@@ -7,5 +7,7 @@ package com.albertgf.apiclient.exception;
 public class AuthApiException extends ApiException {
     public AuthApiException(int httpCode, String description, Throwable cause) {
         super(httpCode, description, cause);
+
+        typeException = Type.AUTH;
     }
 }

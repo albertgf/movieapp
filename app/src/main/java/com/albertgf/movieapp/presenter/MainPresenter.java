@@ -1,6 +1,7 @@
 package com.albertgf.movieapp.presenter;
 
 
+import com.albertgf.apiclient.exception.ApiException;
 import com.albertgf.domain.model.MovieModelView;
 import com.albertgf.domain.model.PaginationModelView;
 import com.albertgf.domain.usecase.DefaultCallback;
@@ -53,7 +54,22 @@ public class MainPresenter implements Presenter {
 
         @Override
         public void onError(Throwable exception) {
-            //TODO MANAGE ERROR
+            ApiException apiException = (ApiException) exception;
+
+            switch (apiException.getTypeException()) {
+                case AUTH:
+
+                    break;
+                case SERVER:
+
+                    break;
+                case NETWORK:
+
+                    break;
+                case NOTFOUND:
+
+                    break;
+            }
         }
     }
 }

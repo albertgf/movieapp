@@ -7,5 +7,7 @@ package com.albertgf.apiclient.exception;
 public class ServerApiException extends ApiException {
     public ServerApiException(int httpCode, String description, Throwable cause) {
         super(httpCode, description, cause);
+
+        typeException = Type.SERVER
     }
 }
