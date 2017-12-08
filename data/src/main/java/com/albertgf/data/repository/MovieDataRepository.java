@@ -20,7 +20,7 @@ import javax.inject.Singleton;
  */
 
 @Singleton
-public class MovieDataRepository implements MovieRepository{
+public class MovieDataRepository implements MovieRepository {
 
     private final DataSourceFactory dataSource;
     private final MovieDataMapper dataMapper;
@@ -48,6 +48,13 @@ public class MovieDataRepository implements MovieRepository{
     }
 
     @Override public void getSimilarMovies(int id, DefaultCallback<PaginationModelView> callback) {
+        final CloudDataSource cloudDataSource = this.dataSource.createCloudDataStore();
 
+        try {
+            ApiResponsePagination pagination = cloudDataSource.getSimilarMovies(id);
+            callback.onNext(dataMapper.transform(pagination));
+        } catch (ServerApiException | NetworkApiException | NotFoundApiException | AuthApiException e) {
+            callback.onError(e);
+        }
     }
 }
