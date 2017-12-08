@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.albertgf.domain.executor.PostExecutionThread;
 import com.albertgf.domain.executor.ThreadExecutor;
+import com.albertgf.domain.repository.MovieRepository;
 import com.albertgf.movieapp.activity.BaseActivity;
 import com.albertgf.movieapp.di.modules.ApplicationModule;
 import com.albertgf.movieapp.navigator.Navigator;
@@ -28,4 +29,5 @@ public interface ApplicationComponent {
     ThreadExecutor threadExecutor();
     PostExecutionThread postExecutionThread();
     // ****** REPOSITORIES ***********
+    MovieRepository movieRepository();
 }

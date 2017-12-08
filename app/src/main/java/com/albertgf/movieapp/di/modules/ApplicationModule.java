@@ -3,8 +3,10 @@ package com.albertgf.movieapp.di.modules;
 import android.content.Context;
 
 import com.albertgf.data.executor.JobExecutor;
+import com.albertgf.data.repository.MovieDataRepository;
 import com.albertgf.domain.executor.PostExecutionThread;
 import com.albertgf.domain.executor.ThreadExecutor;
+import com.albertgf.domain.repository.MovieRepository;
 import com.albertgf.movieapp.MovieApp;
 import com.albertgf.movieapp.UIThread;
 import com.albertgf.movieapp.navigator.Navigator;
@@ -43,5 +45,9 @@ public class ApplicationModule {
     @Provides @Singleton
     PostExecutionThread providePostExecutionThread(UIThread uiThread) {
         return uiThread;
+    }
+
+    @Provides @Singleton MovieRepository provideMovieRepository(MovieDataRepository repository) {
+        return repository;
     }
 }
