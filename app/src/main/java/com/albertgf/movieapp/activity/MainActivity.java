@@ -17,6 +17,7 @@ import com.albertgf.movieapp.di.components.BaseComponent;
 import com.albertgf.movieapp.di.components.DaggerBaseComponent;
 import com.albertgf.movieapp.holder.MovieHolder;
 import com.albertgf.movieapp.presenter.MainPresenter;
+import com.albertgf.movieapp.view.MovieItemView;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -76,9 +77,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
                     protected DefaultViewHolder<MovieModelView> onCreateViewHolder(
                             ViewGroup parent,
                             int viewType) {
-                        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-                        View view = inflater.inflate(R.layout.item_movie_view, null, false);
-                        return new MovieHolder(view);
+                        return new MovieHolder(new MovieItemView(MainActivity.this));
                     }
                 });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -97,6 +96,6 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
 
     @Override public void onItemClick(@NonNull MovieModelView item,
                                       @NonNull DefaultViewHolder<MovieModelView> viewHolder, @NonNull View view) {
-        navigator.navigateToDetail(this, ((MovieHolder) viewHolder).ivMovie, new Gson().toJson(item));
+        navigator.navigateToDetail(this, ((MovieHolder) viewHolder).view.getTransitionView(), new Gson().toJson(item));
     }
 }

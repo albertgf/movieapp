@@ -2,6 +2,7 @@ package com.albertgf.data.mapper;
 
 import com.albertgf.apiclient.model.ApiModelMovie;
 import com.albertgf.apiclient.model.ApiResponsePagination;
+import com.albertgf.data.BuildConfig;
 import com.albertgf.domain.model.MovieModelView;
 import com.albertgf.domain.model.PaginationModelView;
 
@@ -52,7 +53,7 @@ public class MovieDataMapper {
                 movie.setPopularity(api.getPopularity());
                 movie.setVoteAverage(api.getVoteAverage());
                 movie.setVoteCount(api.getVoteCount());
-                movie.setPosterPath(api.getPosterPath());
+                movie.setPosterPath(String.format("%s%s",BuildConfig.IMAGE_URL, api.getPosterPath()));
                 movie.setReleaseDate(api.getReleaseDate());
 
                 domain.add(movie);
