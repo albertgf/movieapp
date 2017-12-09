@@ -19,7 +19,7 @@ public class MainPresenter implements Presenter {
     private final TopRatedUseCase topRatedUseCase;
     private View view;
     private int totalPages;
-    private int page;
+    private int page = 1;
 
     @Inject
     public MainPresenter(TopRatedUseCase topRatedUseCase) {
@@ -28,6 +28,8 @@ public class MainPresenter implements Presenter {
 
     @Override public void onViewAttached(PresenterView view, boolean isNew) {
         this.view = (View) view;
+
+        topRatedUseCase.execute(new TopRatedCallback(), TopRatedUseCase.Params.forPage(page));
     }
 
     @Override public void onViewDetached() {

@@ -8,6 +8,6 @@ public class ServerApiException extends ApiException {
     public ServerApiException(int httpCode, String description, Throwable cause) {
         super(httpCode, description, cause);
 
-        typeException = Type.SERVER
+        typeException = Type.SERVER;
     }
 }
