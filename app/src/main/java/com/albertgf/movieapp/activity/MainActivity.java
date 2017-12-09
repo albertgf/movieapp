@@ -1,10 +1,7 @@
 package com.albertgf.movieapp.activity;
 
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +17,7 @@ import com.albertgf.movieapp.di.components.BaseComponent;
 import com.albertgf.movieapp.di.components.DaggerBaseComponent;
 import com.albertgf.movieapp.holder.MovieHolder;
 import com.albertgf.movieapp.presenter.MainPresenter;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -99,6 +97,6 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
 
     @Override public void onItemClick(@NonNull MovieModelView item,
                                       @NonNull DefaultViewHolder<MovieModelView> viewHolder, @NonNull View view) {
-
+        navigator.navigateToDetail(this, ((MovieHolder) viewHolder).ivMovie, new Gson().toJson(item));
     }
 }
