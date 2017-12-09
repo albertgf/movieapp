@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.albertgf.domain.model.MovieModelView;
 import com.albertgf.movieapp.R;
@@ -25,8 +26,10 @@ import butterknife.ButterKnife;
  * Created by albertgf on 9/12/17.
  */
 
-public class DetailActivity extends BaseActivity{
-    @BindView(R.id.act_detail_iv_poster) ImageView ivMovie;
+public class DetailActivity extends BaseActivity {
+    @BindView (R.id.act_detail_iv_poster) ImageView ivMovie;
+    @BindView (R.id.act_detail_tv_overview) TextView tvOverview;
+    @BindView (R.id.act_detail_tv_title) TextView tvTitle;
 
     private BaseComponent component;
 
@@ -73,6 +76,8 @@ public class DetailActivity extends BaseActivity{
         MovieModelView movie = new Gson().fromJson(getIntent().getExtras().getString("movie"), MovieModelView.class);
 
         initTransition(movie.getPosterPath(), getIntent().getExtras().getString("transition"));
+        tvTitle.setText(movie.getTitle());
+        tvOverview.setText(movie.getOverview());
     }
 
     private void initTransition(String url, String transitionName) {
