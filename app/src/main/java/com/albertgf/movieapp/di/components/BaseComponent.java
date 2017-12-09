@@ -1,5 +1,6 @@
 package com.albertgf.movieapp.di.components;
 
+import com.albertgf.movieapp.activity.DetailActivity;
 import com.albertgf.movieapp.activity.MainActivity;
 import com.albertgf.movieapp.di.PerActivity;
 import com.albertgf.movieapp.di.modules.ActivityModule;
@@ -14,4 +15,5 @@ import dagger.Component;
 @Component (dependencies = ApplicationComponent.class, modules = {ActivityModule.class})
 public interface BaseComponent {
     void inject(MainActivity activity);
+    void inject(DetailActivity activity);
 }
