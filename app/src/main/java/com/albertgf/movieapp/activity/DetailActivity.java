@@ -36,6 +36,9 @@ import butterknife.ButterKnife;
  */
 
 public class DetailActivity extends BaseActivity implements RequestListener, DetailPresenter.View {
+    private static final String EXTRA_MOVIE = "movie";
+    private static final String EXTRA_TRANSACTION = "transaction";
+
     @BindView (R.id.act_detail_vp) ViewPager vpSimilar;
 
     @Inject DetailPresenter presenter;
@@ -45,8 +48,8 @@ public class DetailActivity extends BaseActivity implements RequestListener, Det
 
     public static Intent getCallingIntent(Context context, String transitionName, String movie) {
         Intent intent = new Intent(context, DetailActivity.class);
-        intent.putExtra("movie", movie);
-        intent.putExtra("transition", transitionName);
+        intent.putExtra(EXTRA_MOVIE, movie);
+        intent.putExtra(EXTRA_TRANSACTION, transitionName);
 
         return intent;
     }
@@ -85,9 +88,9 @@ public class DetailActivity extends BaseActivity implements RequestListener, Det
     }
 
     private void initData() {
-        MovieModelView movie = new Gson().fromJson(getIntent().getExtras().getString("movie"), MovieModelView.class);
+        MovieModelView movie = new Gson().fromJson(getIntent().getExtras().getString(EXTRA_MOVIE), MovieModelView.class);
 
-        adapter.addItem(movie, this, getIntent().getExtras().getString("transition"));
+        adapter.addItem(movie, this, getIntent().getExtras().getString(EXTRA_TRANSACTION));
         adapter.notifyDataSetChanged();
         presenter.setMovie(movie);
     }
