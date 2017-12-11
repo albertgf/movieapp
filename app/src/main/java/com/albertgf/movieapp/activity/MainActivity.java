@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,6 +36,7 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
     @Inject MainPresenter presenter;
     private BaseComponent component;
     private DefaultAdapter<MovieModelView> adapter;
+    private LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +63,9 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
 
     private void initInjector() {
         this.component = DaggerBaseComponent.builder()
-                .applicationComponent(getApplicationComponent())
-                .activityModule(getActivityModule())
-                .build();
+                                            .applicationComponent(getApplicationComponent())
+                                            .activityModule(getActivityModule())
+                                            .build();
         component.inject(this);
     }
 
@@ -80,22 +80,27 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
                         return new MovieHolder(new MovieItemView(MainActivity.this));
                     }
                 });
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         rvMovies.setLayoutManager(layoutManager);
         rvMovies.setAdapter(adapter);
     }
 
-    @Override public void onError(String text) {
+    @Override
+    public void onError(String text) {
 
     }
 
-    @Override public void bindMovies(List<MovieModelView> list) {
+    @Override
+    public void bindMovies(List<MovieModelView> list) {
         adapter.addItems(list);
         adapter.notifyDataSetChanged();
     }
 
-    @Override public void onItemClick(@NonNull MovieModelView item,
-                                      @NonNull DefaultViewHolder<MovieModelView> viewHolder, @NonNull View view) {
-        navigator.navigateToDetail(this, ((MovieHolder) viewHolder).view.getTransitionView(), new Gson().toJson(item));
+    @Override
+    public void onItemClick(@NonNull MovieModelView item,
+                            @NonNull DefaultViewHolder<MovieModelView> viewHolder,
+                            @NonNull View view) {
+        navigator.navigateToDetail(this, ((MovieHolder) viewHolder).view.getImageView(),
+                ((MovieHolder) viewHolder).view.getVoteView(), new Gson().toJson(item));
     }
 }

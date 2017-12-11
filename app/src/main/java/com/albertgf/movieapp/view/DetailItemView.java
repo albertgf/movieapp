@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 
 public class DetailItemView extends ConstraintLayout {
     @BindView(R.id.item_detail_tv_title) TextView tvTitle;
+    @BindView(R.id.item_detail_tv_vote) TextView tvVote;
     @BindView(R.id.item_detail_iv_poster) ImageView ivPoster;
     @BindView(R.id.item_detail_tv_overview) TextView tvOverview;
 
@@ -45,24 +46,42 @@ public class DetailItemView extends ConstraintLayout {
         view.setLayoutParams(params);
     }
 
-    public View getTransitionView() {
-        return ivPoster;
-    }
-
     public void bindData(MovieModelView movie) {
 
-        tvTitle.setText(movie.getTitle());
-        tvOverview.setText(movie.getOverview());
+        bindMovieText(movie);
 
         Glide.with(ivPoster).load(movie.getPosterPath()).into(ivPoster);
     }
 
     public void bindData(MovieModelView movie, RequestListener listener, String transitionName) {
 
-        tvTitle.setText(movie.getTitle());
-        tvOverview.setText(movie.getOverview());
+        bindMovieText(movie);
         ViewCompat.setTransitionName(ivPoster, transitionName);
 
         Glide.with(ivPoster).load(movie.getPosterPath()).listener(listener).into(ivPoster);
+    }
+
+    private void bindMovieText(MovieModelView movie) {
+        tvTitle.setText(movie.getTitle());
+        tvVote.setText(String.format("%.1f", movie.getVoteAverage()));
+        tvVote.setBackgroundResource(getResourceBackground((int) movie.getVoteAverage()));
+        tvOverview.setText(movie.getOverview());
+    }
+
+    public int getResourceBackground(int valueInt) {
+        switch (valueInt) {
+            case 9:
+                return R.drawable.shape_circle_9;
+            case 8:
+                return R.drawable.shape_circle_8;
+            case 7:
+                return R.drawable.shape_circle_7;
+            case 6:
+                return R.drawable.shape_circle_6;
+            case 5:
+                return R.drawable.shape_circle_5;
+            default:
+                return R.drawable.shape_circle_4;
+        }
     }
 }

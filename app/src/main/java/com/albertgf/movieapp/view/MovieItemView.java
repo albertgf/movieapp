@@ -46,8 +46,12 @@ public class MovieItemView extends ConstraintLayout {
         view.setLayoutParams(params);
     }
 
-    public View getTransitionView() {
+    public View getImageView() {
         return ivPoster;
+    }
+
+    public View getVoteView() {
+        return tvVote;
     }
 
     public void bindData(MovieModelView movie) {
