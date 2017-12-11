@@ -12,8 +12,6 @@ import com.albertgf.domain.model.MovieModelView;
 import com.albertgf.movieapp.R;
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -22,9 +20,9 @@ import butterknife.ButterKnife;
  */
 
 public class MovieItemView extends ConstraintLayout {
-    @BindView(R.id.view_movie_tv_title) TextView tvTitle;
-    @BindView(R.id.view_movie_tv_vote) TextView tvVote;
-    @BindView(R.id.view_movie_iv) ImageView ivPoster;
+    @BindView (R.id.view_movie_tv_title) TextView tvTitle;
+    @BindView (R.id.view_movie_tv_vote) TextView tvVote;
+    @BindView (R.id.view_movie_iv) ImageView ivPoster;
 
     public MovieItemView(Context context) {
         this(context, null);

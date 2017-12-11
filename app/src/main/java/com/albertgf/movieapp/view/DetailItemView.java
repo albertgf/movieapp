@@ -21,10 +21,10 @@ import butterknife.ButterKnife;
  */
 
 public class DetailItemView extends ConstraintLayout {
-    @BindView(R.id.item_detail_tv_title) TextView tvTitle;
-    @BindView(R.id.item_detail_tv_vote) TextView tvVote;
-    @BindView(R.id.item_detail_iv_poster) ImageView ivPoster;
-    @BindView(R.id.item_detail_tv_overview) TextView tvOverview;
+    @BindView (R.id.item_detail_tv_title) TextView tvTitle;
+    @BindView (R.id.item_detail_tv_vote) TextView tvVote;
+    @BindView (R.id.item_detail_iv_poster) ImageView ivPoster;
+    @BindView (R.id.item_detail_tv_overview) TextView tvOverview;
 
     public DetailItemView(Context context) {
         this(context, null);

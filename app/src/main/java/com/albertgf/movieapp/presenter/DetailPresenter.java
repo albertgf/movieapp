@@ -6,7 +6,6 @@ import com.albertgf.domain.model.MovieModelView;
 import com.albertgf.domain.model.PaginationModelView;
 import com.albertgf.domain.usecase.DefaultCallback;
 import com.albertgf.domain.usecase.SimilarUseCase;
-import com.albertgf.domain.usecase.TopRatedUseCase;
 
 import java.util.List;
 
@@ -25,11 +24,13 @@ public class DetailPresenter implements Presenter {
         this.similarUseCase = similarUseCase;
     }
 
-    @Override public void onViewAttached(PresenterView view, boolean isNew) {
+    @Override
+    public void onViewAttached(PresenterView view, boolean isNew) {
         this.view = (View) view;
     }
 
-    @Override public void onViewDetached() {
+    @Override
+    public void onViewDetached() {
 
     }
 

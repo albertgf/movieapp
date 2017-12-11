@@ -91,7 +91,8 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
     }
 
     private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
-        @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
 
             visibleItemCount = layoutManager.getChildCount();
             totalItemCount = layoutManager.getItemCount();

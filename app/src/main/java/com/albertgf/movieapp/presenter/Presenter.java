@@ -6,6 +6,7 @@ package com.albertgf.movieapp.presenter;
 
 public interface Presenter {
     void onViewAttached(PresenterView view, boolean isNew);
+
     void onViewDetached();
 
     interface PresenterView {

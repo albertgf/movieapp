@@ -16,11 +16,12 @@ import com.albertgf.movieapp.activity.DetailActivity;
 public class Navigator {
     public void navigateToDetail(Activity context, View imageView, View voteView, String model) {
         if (context != null) {
-            Intent intentToLaunch = DetailActivity.getCallingIntent(context, ViewCompat.getTransitionName(imageView),
+            Intent intentToLaunch = DetailActivity.getCallingIntent(context,
+                    ViewCompat.getTransitionName(imageView),
                     model);
-            Pair<View, String> pairImage =  Pair.create(imageView,
+            Pair<View, String> pairImage = Pair.create(imageView,
                     ViewCompat.getTransitionName(imageView));
-            Pair<View, String> pairVote =  Pair.create(voteView,
+            Pair<View, String> pairVote = Pair.create(voteView,
                     "tv_vote");
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     context,

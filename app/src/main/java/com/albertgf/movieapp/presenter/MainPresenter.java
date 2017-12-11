@@ -28,18 +28,20 @@ public class MainPresenter implements Presenter {
         this.topRatedUseCase = topRatedUseCase;
     }
 
-    @Override public void onViewAttached(PresenterView view, boolean isNew) {
+    @Override
+    public void onViewAttached(PresenterView view, boolean isNew) {
         this.view = (View) view;
 
         topRatedUseCase.execute(new TopRatedCallback(), TopRatedUseCase.Params.forPage(page));
     }
 
-    @Override public void onViewDetached() {
+    @Override
+    public void onViewDetached() {
 
     }
 
     public void paginateMovies() {
-        if(page < totalPages && !isLoading) {
+        if (page < totalPages && !isLoading) {
             isLoading = true;
             topRatedUseCase.execute(new TopRatedCallback(), TopRatedUseCase.Params.forPage(++page));
         }
