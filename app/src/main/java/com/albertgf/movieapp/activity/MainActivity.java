@@ -38,6 +38,10 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
     private DefaultAdapter<MovieModelView> adapter;
     private LinearLayoutManager layoutManager;
 
+    private int visibleItemCount;
+    private int totalItemCount;
+    private int pastVisiblesItems;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +87,21 @@ public class MainActivity extends BaseActivity implements MainPresenter.View, It
         layoutManager = new LinearLayoutManager(this);
         rvMovies.setLayoutManager(layoutManager);
         rvMovies.setAdapter(adapter);
+        rvMovies.addOnScrollListener(onScrollListener);
     }
+
+    private final RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener() {
+        @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+            visibleItemCount = layoutManager.getChildCount();
+            totalItemCount = layoutManager.getItemCount();
+            pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+
+            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount && totalItemCount > 0) {
+                presenter.paginateMovies();
+            }
+        }
+    };
 
     @Override
     public void onError(String text) {

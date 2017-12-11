@@ -21,6 +21,8 @@ public class MainPresenter implements Presenter {
     private int totalPages;
     private int page = 1;
 
+    private boolean isLoading = false;
+
     @Inject
     public MainPresenter(TopRatedUseCase topRatedUseCase) {
         this.topRatedUseCase = topRatedUseCase;
@@ -36,6 +38,13 @@ public class MainPresenter implements Presenter {
 
     }
 
+    public void paginateMovies() {
+        if(page < totalPages && !isLoading) {
+            isLoading = true;
+            topRatedUseCase.execute(new TopRatedCallback(), TopRatedUseCase.Params.forPage(++page));
+        }
+    }
+
     public interface View extends PresenterView {
         void bindMovies(List<MovieModelView> list);
     }
@@ -46,16 +55,19 @@ public class MainPresenter implements Presenter {
             totalPages = pagination.getTotalPages();
             page = pagination.getPage();
             view.bindMovies(pagination.getResults());
+            isLoading = false;
         }
 
         @Override
         public void onComplete() {
             super.onComplete();
+            isLoading = false;
 
         }
 
         @Override
         public void onError(Throwable exception) {
+            isLoading = false;
             ApiException apiException = (ApiException) exception;
 
             switch (apiException.getTypeException()) {
