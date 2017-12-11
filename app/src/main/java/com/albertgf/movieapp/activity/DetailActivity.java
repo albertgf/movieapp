@@ -15,6 +15,7 @@ import com.albertgf.movieapp.R;
 import com.albertgf.movieapp.adapter.SimilarPagerAdapter;
 import com.albertgf.movieapp.di.components.BaseComponent;
 import com.albertgf.movieapp.di.components.DaggerBaseComponent;
+import com.albertgf.movieapp.presenter.DetailPresenter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -22,7 +23,10 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.google.gson.Gson;
 
+import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,8 +35,10 @@ import butterknife.ButterKnife;
  * Created by albertgf on 9/12/17.
  */
 
-public class DetailActivity extends BaseActivity implements RequestListener {
+public class DetailActivity extends BaseActivity implements RequestListener, DetailPresenter.View {
     @BindView (R.id.act_detail_vp) ViewPager vpSimilar;
+
+    @Inject DetailPresenter presenter;
 
     private BaseComponent component;
     private SimilarPagerAdapter adapter;
@@ -61,13 +67,13 @@ public class DetailActivity extends BaseActivity implements RequestListener {
     @Override
     public void onStart() {
         super.onStart();
-        //presenter.onViewAttached(this, false);
+        presenter.onViewAttached(this, false);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        //presenter.onViewDetached();
+        presenter.onViewDetached();
     }
 
     private void initInjector() {
@@ -83,6 +89,7 @@ public class DetailActivity extends BaseActivity implements RequestListener {
 
         adapter.addItem(movie, this, getIntent().getExtras().getString("transition"));
         adapter.notifyDataSetChanged();
+        presenter.setMovie(movie);
     }
 
     private void initViews() {
@@ -100,5 +107,18 @@ public class DetailActivity extends BaseActivity implements RequestListener {
                                              boolean isFirstResource) {
         supportStartPostponedEnterTransition();
         return false;
+    }
+
+    @Override
+    public void onError(String text) {
+
+    }
+
+    @Override
+    public void bindMovies(List<MovieModelView> list) {
+        for(MovieModelView movie : list) {
+            adapter.addItem(movie);
+        }
+        adapter.notifyDataSetChanged();
     }
 }
