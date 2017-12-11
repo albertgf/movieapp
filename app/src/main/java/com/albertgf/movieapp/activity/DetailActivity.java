@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class DetailActivity extends BaseActivity implements RequestListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActivityCompat.postponeEnterTransition(this);
         setContentView(R.layout.detail_activity);
 
         ButterKnife.bind(this);
@@ -79,39 +81,13 @@ public class DetailActivity extends BaseActivity implements RequestListener {
     private void initData() {
         MovieModelView movie = new Gson().fromJson(getIntent().getExtras().getString("movie"), MovieModelView.class);
 
-        initTransition(movie.getPosterPath(), getIntent().getExtras().getString("transition"));
-        adapter.addItem(movie);
+        adapter.addItem(movie, this, getIntent().getExtras().getString("transition"));
         adapter.notifyDataSetChanged();
     }
 
     private void initViews() {
         adapter = new SimilarPagerAdapter(this);
         vpSimilar.setAdapter(adapter);
-    }
-
-    private void initTransition(String url, String transitionName) {
-
-        adapter.ge
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ivMovie.setTransitionName(transitionName);
-        }
-
-        Glide.with(this).load(url).listener(new RequestListener() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target,
-                                        boolean isFirstResource) {
-                supportStartPostponedEnterTransition();
-                return false;
-            }
-
-            @Override
-            public boolean onResourceReady(Object resource, Object model, Target target,
-                                           DataSource dataSource, boolean isFirstResource) {
-                supportStartPostponedEnterTransition();
-                return false;
-            }
-        }).into(ivMovie);*/
-
     }
 
     @Override public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target,

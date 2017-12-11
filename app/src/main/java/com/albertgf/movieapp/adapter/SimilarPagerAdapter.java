@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.albertgf.domain.model.MovieModelView;
 import com.albertgf.movieapp.view.DetailItemView;
+import com.bumptech.glide.request.RequestListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,9 @@ import java.util.List;
 public class SimilarPagerAdapter extends PagerAdapter {
     private Context context;
     private List<MovieModelView> movies = new ArrayList<>();
+    private RequestListener transitionListener;
+    private boolean firstTime = true;
+    private String transitionName;
 
     public SimilarPagerAdapter(Context context) {
         this.context = context;
@@ -27,7 +31,13 @@ public class SimilarPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup collection, int position) {
         DetailItemView view = new DetailItemView(context);
 
-        view.bindData(movies.get(position));
+        if(firstTime) {
+            view.bindData(movies.get(position), transitionListener, transitionName);
+
+            firstTime = false;
+        } else {
+            view.bindData(movies.get(position));
+        }
 
         collection.addView(view);
         return view;
@@ -57,5 +67,9 @@ public class SimilarPagerAdapter extends PagerAdapter {
         movies.add(movie);
     }
 
-
+    public void addItem(MovieModelView movie, RequestListener transitionListener, String transition) {
+        this.transitionListener = transitionListener;
+        this.transitionName = transition;
+        movies.add(movie);
+    }
 }

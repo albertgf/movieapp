@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.albertgf.domain.model.MovieModelView;
 import com.albertgf.movieapp.R;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,8 +53,16 @@ public class DetailItemView extends ConstraintLayout {
 
         tvTitle.setText(movie.getTitle());
         tvOverview.setText(movie.getOverview());
-        ViewCompat.setTransitionName(ivPoster, String.valueOf(movie.getId()));
 
         Glide.with(ivPoster).load(movie.getPosterPath()).into(ivPoster);
+    }
+
+    public void bindData(MovieModelView movie, RequestListener listener, String transitionName) {
+
+        tvTitle.setText(movie.getTitle());
+        tvOverview.setText(movie.getOverview());
+        ViewCompat.setTransitionName(ivPoster, transitionName);
+
+        Glide.with(ivPoster).load(movie.getPosterPath()).listener(listener).into(ivPoster);
     }
 }
