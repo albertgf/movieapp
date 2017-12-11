@@ -3,25 +3,25 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/pokeAppPrimary</item>
-        <item name="colorPrimaryDark">@color/pokeAppPrimaryDark</item>
-        <item name="colorAccent">@color/pokeAppAccent</item>
+        <item name="colorPrimary">@color/movieAppPrimary</item>
+        <item name="colorPrimaryDark">@color/movieAppPrimaryDark</item>
+        <item name="colorAccent">@color/movieAppAccent</item>
     </style>
 
     <style name="ToolbarThemePrimary" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:background">@color/pokeAppPrimary</item>
+        <item name="android:background">@color/movieAppPrimary</item>
         <!-- android:textColorPrimary is the color of the title text in the Toolbar  -->
-        <item name="android:textColorPrimary">@color/pokeAppTextLight</item>
+        <item name="android:textColorPrimary">@color/movieAppTextLight</item>
         <!-- actionMenuTextColor is the color of the text of action (menu) items  -->
-        <item name="actionMenuTextColor">@color/pokeAppTextLight</item>
+        <item name="actionMenuTextColor">@color/movieAppTextLight</item>
         <!-- Tints the input fields like checkboxes and text fields -->
-        <item name="colorAccent">@color/pokeAppTextLight</item>
+        <item name="colorAccent">@color/movieAppTextLight</item>
         <!-- Applies to views in their normal state. -->
-        <item name="colorControlNormal">@color/pokeAppTextLight</item>
+        <item name="colorControlNormal">@color/movieAppTextLight</item>
         <!-- Applies to views in their activated state (i.e checked or switches) -->
-        <item name="colorControlActivated">@color/pokeAppTextLight</item>
+        <item name="colorControlActivated">@color/movieAppTextLight</item>
         <!-- Applied to framework control highlights (i.e ripples or list selectors) -->
-        <item name="colorControlHighlight">@color/pokeAppTextLight</item>
+        <item name="colorControlHighlight">@color/movieAppTextLight</item>
 
         <!-- Enable these below if you want clicking icons to trigger a ripple effect -->
         <!--

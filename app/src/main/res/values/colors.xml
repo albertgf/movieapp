@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="pokeAppPrimary">#3F51B5</color>
-    <color name="pokeAppPrimaryDark">#303F9F</color>
-    <color name="pokeAppAccent">#FF4081</color>
+    <color name="movieAppPrimary">#3F51B5</color>
+    <color name="movieAppPrimaryDark">#303F9F</color>
+    <color name="movieAppAccent">#FF4081</color>
 
-    <color name="pokeAppTextLight">#FFFFFF</color>
-    <color name="pokeAppTextDark">#333</color>
+    <color name="movieAppTextLight">#FFFFFF</color>
+    <color name="movieAppTextDark">#333</color>
+
+    <color name="movieRating9">#67d865</color>
+    <color name="movieRating8">#aad865</color>
+    <color name="movieRating7">#c8d865</color>
+    <color name="movieRating6">#d8ca65</color>
+    <color name="movieRating5">#d8a065</color>
+    <color name="movieRating4">#d87b65</color>
 </resources>

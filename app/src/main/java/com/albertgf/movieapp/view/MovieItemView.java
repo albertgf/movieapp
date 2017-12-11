@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 
 public class MovieItemView extends ConstraintLayout {
     @BindView(R.id.view_movie_tv_title) TextView tvTitle;
+    @BindView(R.id.view_movie_tv_vote) TextView tvVote;
     @BindView(R.id.view_movie_iv) ImageView ivPoster;
 
     public MovieItemView(Context context) {
@@ -52,8 +53,27 @@ public class MovieItemView extends ConstraintLayout {
     public void bindData(MovieModelView movie) {
 
         tvTitle.setText(movie.getTitle());
+        tvVote.setText(String.format("%.1f", movie.getVoteAverage()));
+        tvVote.setBackgroundResource(getResourceBackground((int) movie.getVoteAverage()));
         ViewCompat.setTransitionName(ivPoster, String.valueOf(movie.getId()));
 
         Glide.with(ivPoster).load(movie.getPosterPath()).into(ivPoster);
+    }
+
+    public int getResourceBackground(int valueInt) {
+        switch (valueInt) {
+            case 9:
+                return R.drawable.shape_circle_9;
+            case 8:
+                return R.drawable.shape_circle_8;
+            case 7:
+                return R.drawable.shape_circle_7;
+            case 6:
+                return R.drawable.shape_circle_6;
+            case 5:
+                return R.drawable.shape_circle_5;
+            default:
+                return R.drawable.shape_circle_4;
+        }
     }
 }
